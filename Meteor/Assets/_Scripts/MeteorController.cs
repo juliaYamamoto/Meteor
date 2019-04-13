@@ -4,12 +4,34 @@ using UnityEngine;
 
 public class MeteorController : MonoBehaviour
 {
+    private Animator meteorAnimator;
+    private bool isAlive;
 
+	private void Awake()
+	{
+        meteorAnimator = GetComponent<Animator>();
+	}
 
-    void OnMouseDown()
+	private void Start()
+	{
+        isAlive = true;
+	}
+
+	private void OnMouseDown()
     {
-        Debug.Log("oi"); 
+        if (isAlive)
+        {
+            DestroyMeteor();
+        }
     }
 
+    private void DestroyMeteor(){
+        isAlive = false;
+        meteorAnimator.SetTrigger("Destroy");
+    }
 
+    private void DestroyGameObject()
+    {
+        GameObject.Destroy(gameObject);
+    }
 }

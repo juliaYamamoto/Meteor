@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public int pointsForMeteor = 10;
 
     [Header("Game Variables")]
-    public int currentPoints = 0;
-    public int currentLives = 0;
+    private int currentPoints = 0;
+    private int currentLives = 0;
 
     [Header("UI Elements")]
     public Text pointsText;

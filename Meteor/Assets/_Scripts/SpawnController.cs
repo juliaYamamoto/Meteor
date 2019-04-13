@@ -7,7 +7,8 @@ public class SpawnController : MonoBehaviour
     [Header("Game Design - Spawn")]
     public float spawnRangeMin = -5;
     public float spawnRangeMax = 5;
-    public float spawnTime = 8;
+    public float spawnTime = 3;
+    public float spawnTimeLimit = 1.2f;
     public float decreasingSpawnTime = 0.05f;
 
     [Header("Game Design - Meteor")]
@@ -51,6 +52,10 @@ public class SpawnController : MonoBehaviour
     {
         currentMovementSpeed += increasingMovementSpeed;
         currentRotationSpeed += increasingRotationSpeed;
-        spawnTime -= decreasingSpawnTime;
+
+        if (spawnTime >= spawnTimeLimit)
+        {
+            spawnTime -= decreasingSpawnTime;
+        }
     }
 }

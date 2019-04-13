@@ -25,8 +25,10 @@ public class MeteorController : MonoBehaviour
         }
     }
 
-    private void DestroyMeteor(){
+    private void DestroyMeteor()
+    {
         isAlive = false;
+        GameManager.instance.AddScore();
         meteorAnimator.SetTrigger("Destroy");
     }
 

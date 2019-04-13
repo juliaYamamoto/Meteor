@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null;
+    [Header("Game Design")]
+    public int pointsForMeteor = 10;
 
+    [Header("Game Variables")]
     public int currentPoints = 0;
     public int currentLives = 0;
 
-    public int pointsForMeteor = 10;
+    [Header("UI Elements")]
+    public Text pointsText;
 
+    public static GameManager instance = null;
     private void Awake()
     {
         if (instance == null)
@@ -25,12 +30,17 @@ public class GameManager : MonoBehaviour
 
     private void NewGame()
     {
+        //Game Variables
         currentPoints = 0;
         currentLives = 0;
+
+        //UI Elements
+        pointsText.text = "Points: 00";
     }
 
     public void AddScore()
     {
         currentPoints += pointsForMeteor;
+        pointsText.text = "Points: " + currentPoints;
     }
 }

@@ -241,5 +241,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28444b10b378b4976a42b28461d61202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.1
-  rotationSpeed: 2
+  limitYPosition: -6

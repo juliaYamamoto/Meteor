@@ -462,16 +462,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRangeMin: -5
   spawnRangeMax: 5
-  spawnTime: 8
-  decreasingSpawnTime: 0.05
-  startMovementSpeed: 0.1
-  startRotationSpeed: 2
-  increasingMovementSpeed: 0.05
-  increasingRotationSpeed: 0.01
-  currentMovementSpeed: 0.1
-  currentRotationSpeed: 2
+  startSpawnTime: 5
+  currentSpawnTime: 5
+  spawnTimeLimit: 0.5
+  decreasingSpawnTime: 0.25
+  startMovementSpeed: 2
+  currentMovementSpeed: 2
+  limitMovementSpeed: 16
+  increasingMovementSpeed: 0.25
   meteor: {fileID: 7230024061125608647, guid: 2ceeb285245cf4bd6a3e9223afb42b07, type: 3}
   timeForNextSpawn: 0
+  currentTime: 0
 --- !u!1 &4850392187300203347
 GameObject:
   m_ObjectHideFlags: 0

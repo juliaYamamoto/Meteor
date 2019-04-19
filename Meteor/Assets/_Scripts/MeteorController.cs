@@ -6,7 +6,6 @@ public class MeteorController : MonoBehaviour
 {
     [Header("Speed")]
     private float movementSpeed = 0.1f;
-    private float rotationSpeed = 2;
 
     [Header("Components")]
     private Animator meteorAnimator;
@@ -14,6 +13,8 @@ public class MeteorController : MonoBehaviour
     [Header("State")]
     private bool isAlive;
 
+    [Header("Limit")]
+    public float limitYPosition = -6;
 
 	private void Awake()
 	{
@@ -25,14 +26,22 @@ public class MeteorController : MonoBehaviour
         isAlive = true;
 	}
 
-    public void setupMeteor(float movementSpeed, float rotationSpeed){
+    public void setupMeteor(float movementSpeed){
         this.movementSpeed = movementSpeed;
-        this.rotationSpeed = rotationSpeed;
     }
+
+	private void Update()
+	{
+        if(isAlive && transform.position.y < limitYPosition){
+            isAlive = false;
+            GameManager.instance.LoseLife();
+            DestroyGameObject();
+
+        }
+	}
 
 	private void FixedUpdate()
 	{
-        transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime, Space.World);
         transform.Translate(Vector3.down * movementSpeed * Time.deltaTime, Space.World);
 	}
 

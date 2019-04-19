@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    [Header("Game Design - Spawn")]
-    public float spawnRangeMin = -5;
-    public float spawnRangeMax = 5;
-    public float spawnTime = 3;
-    public float spawnTimeLimit = 1.2f;
-    public float decreasingSpawnTime = 0.05f;
+    
 
-    [Header("Game Design - Meteor")]
-    public float startMovementSpeed = 0.1f; 
-    public float startRotationSpeed = 2;
-    public float increasingMovementSpeed = 0.05f;
-    public float increasingRotationSpeed = 0.01f;
-    public float currentMovementSpeed = 0.1f;
-    public float currentRotationSpeed = 2;
+    [Header("Game Design - Spawn")]
+    public float spawnRangeMin;
+    public float spawnRangeMax;
+
+    [Header("Game Design - Spawn time")]
+    public float startSpawnTime;
+    [Range(0.5f, 5f)] public float currentSpawnTime;
+    public float spawnTimeLimit;
+    public float decreasingSpawnTime;
+
+    [Header("Game Design - Meteor Speed")]
+    public float startMovementSpeed;
+    [Range(2f, 16f)] public float currentMovementSpeed;
+    public float limitMovementSpeed;
+    public float increasingMovementSpeed;
 
     [Header("Game Elements")]
     public MeteorController meteor;
@@ -32,7 +35,7 @@ public class SpawnController : MonoBehaviour
         if(timeForNextSpawn <= currentTime) {
             SpawnNewMeteor();
             IncreaseDificulty();
-            timeForNextSpawn = currentTime + spawnTime;
+            timeForNextSpawn = currentTime + currentSpawnTime;
         }
 	}
 
@@ -45,17 +48,15 @@ public class SpawnController : MonoBehaviour
                                              transform.position.z);
         
         MeteorController newMeteor = (MeteorController)GameObject.Instantiate(meteor, meteorPosition, transform.rotation);
-        newMeteor.setupMeteor(currentMovementSpeed, currentRotationSpeed);
+        newMeteor.setupMeteor(currentMovementSpeed);
     }
 
     private void IncreaseDificulty()
     {
-        currentMovementSpeed += increasingMovementSpeed;
-        currentRotationSpeed += increasingRotationSpeed;
+        if (currentSpawnTime > spawnTimeLimit)
+            currentSpawnTime -= decreasingSpawnTime;
 
-        if (spawnTime >= spawnTimeLimit)
-        {
-            spawnTime -= decreasingSpawnTime;
-        }
+        if (currentMovementSpeed < limitMovementSpeed)
+            currentMovementSpeed += increasingMovementSpeed;
     }
 }

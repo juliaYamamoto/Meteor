@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Variables")]
     private int currentPoints = 0;
-    private int currentLives = 0;
+    private int currentLives = 3;
 
     [Header("UI Elements")]
     public Text pointsText;
+
 
     public static GameManager instance = null;
     private void Awake()
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         //Game Variables
         currentPoints = 0;
-        currentLives = 0;
+        currentLives = 3;
 
         //UI Elements
         pointsText.text = "Points: 00";
@@ -42,5 +43,18 @@ public class GameManager : MonoBehaviour
     {
         currentPoints += pointsForMeteor;
         pointsText.text = "Points: " + currentPoints;
+    }
+
+    public void LoseLife()
+    {
+        currentLives -= 1;
+        if(currentLives == 0){
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over");
     }
 }

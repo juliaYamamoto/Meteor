@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     [Header("Game Variables")]
     private int currentPoints = 0;
     private int currentLives = 3;
+    private int highScore = 0;
 
     [Header("UI Elements")]
     public Text pointsText;
+    public Text highScoreText;
     public Text gameOverText;
     public Text tryAgainText;
 
@@ -87,6 +89,11 @@ public class GameManager : MonoBehaviour
 
         gameOverText.gameObject.SetActive(true);
         tryAgainText.gameObject.SetActive(true);
+
+        if(highScore < currentPoints){
+            highScore = currentPoints;
+            highScoreText.text = "High Score: " + highScore;
+        }
        
     }
 

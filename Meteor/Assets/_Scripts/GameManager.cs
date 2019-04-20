@@ -14,7 +14,14 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     public Text pointsText;
+    public Text gameOverText;
+    public Text tryAgainText;
 
+    public enum GameState
+    {
+        Start,
+        End
+    } public GameState currentGameState;
 
     public static GameManager instance = null;
     private void Awake()
@@ -29,14 +36,20 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-    private void NewGame()
+	private void NewGame()
     {
+        //Game State
+        currentGameState = GameState.Start;
+
         //Game Variables
         currentPoints = 0;
         currentLives = 3;
 
         //UI Elements
         pointsText.text = "Points: 00";
+        gameOverText.gameObject.SetActive(false);
+        tryAgainText.gameObject.SetActive(false);
+
     }
 
     public void AddScore()
@@ -55,6 +68,17 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game Over");
+        currentGameState = GameState.End;
+
+        gameOverText.gameObject.SetActive(true);
+        tryAgainText.gameObject.SetActive(true);
+       
     }
+
+    public void TryAgainClicked()
+    {
+        NewGame();
+    }
+
 }
+

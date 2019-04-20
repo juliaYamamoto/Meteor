@@ -43,6 +43,10 @@ public class MeteorController : MonoBehaviour
 	private void FixedUpdate()
 	{
         transform.Translate(Vector3.down * movementSpeed * Time.deltaTime, Space.World);
+
+        if(GameManager.instance.currentGameState == GameManager.GameState.End){
+            DestroyGameObject();
+        }
 	}
 
 	private void OnMouseDown()

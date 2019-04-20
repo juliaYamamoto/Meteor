@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    
-
     [Header("Game Design - Spawn")]
     public float spawnRangeMin;
     public float spawnRangeMax;
@@ -29,13 +27,22 @@ public class SpawnController : MonoBehaviour
     public float timeForNextSpawn = 0;
     public float currentTime = 0;
 
+    [Header("Game Variables")]
+    private bool isGameDificultyReseted = false;
+
 	private void FixedUpdate()
 	{
-        currentTime = Time.time;
-        if(timeForNextSpawn <= currentTime) {
-            SpawnNewMeteor();
-            IncreaseDificulty();
-            timeForNextSpawn = currentTime + currentSpawnTime;
+        if (GameManager.instance.currentGameState == GameManager.GameState.Start)
+        {
+            currentTime = Time.time;
+            if (timeForNextSpawn <= currentTime)
+            {
+                SpawnNewMeteor();
+                IncreaseDificulty();
+                timeForNextSpawn = currentTime + currentSpawnTime;
+            }
+        } else if (!isGameDificultyReseted){
+            ResetDificulty();
         }
 	}
 
@@ -58,5 +65,12 @@ public class SpawnController : MonoBehaviour
 
         if (currentMovementSpeed < limitMovementSpeed)
             currentMovementSpeed += increasingMovementSpeed;
+    }
+
+    private void ResetDificulty()
+    {
+        isGameDificultyReseted = true;
+        currentSpawnTime = startSpawnTime;
+        currentMovementSpeed = startMovementSpeed;
     }
 }

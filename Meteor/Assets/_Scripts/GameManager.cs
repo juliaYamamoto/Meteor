@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     public Text gameOverText;
     public Text tryAgainText;
 
+    [Header("UI Elements - Lifes")]
+    public Image oneLifeImage;
+    public Image twoLifesImage;
+    public Image threeLifesImage;
+
     public enum GameState
     {
         Start,
@@ -32,7 +37,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
         NewGame();
     }
 
@@ -50,6 +54,9 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         tryAgainText.gameObject.SetActive(false);
 
+        oneLifeImage.gameObject.SetActive(true);
+        twoLifesImage.gameObject.SetActive(true);
+        threeLifesImage.gameObject.SetActive(true);
     }
 
     public void AddScore()
@@ -61,9 +68,17 @@ public class GameManager : MonoBehaviour
     public void LoseLife()
     {
         currentLives -= 1;
-        if(currentLives == 0){
+
+        if(currentLives == 2){
+            threeLifesImage.gameObject.SetActive(false);
+        } else if (currentLives == 1) {
+            twoLifesImage.gameObject.SetActive(false);
+        } else if (currentLives == 0)
+        {
+            oneLifeImage.gameObject.SetActive(false);
             GameOver();
         }
+
     }
 
     private void GameOver()
@@ -81,4 +96,3 @@ public class GameManager : MonoBehaviour
     }
 
 }
-

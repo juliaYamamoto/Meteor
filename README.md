@@ -1,2 +1,4 @@
-# Meteor
-A simple cute meteor game
+# Meteor Atack
+
+Simple game made in Unity. 
+
